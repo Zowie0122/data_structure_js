@@ -27,7 +27,28 @@ class Tree {
     return isFound;
   }
 
-  traverseDepthFirst(fn) {}
+  traverseDepthFirst(fn) {
+    const traverse = (tree) => {
+      if (tree.children.length > 0) {
+        for (const child of tree.children) {
+          traverse(child);
+        }
+      }
+      fn(tree);
+    };
+    traverse(this);
+  }
 
-  traverseBreadthFirst(fn) {}
+  traverseBreadthFirst(fn) {
+    const queue = [this];
+    while (queue.length > 0) {
+      fn(queue[0]);
+      if (queue[0].children.length > 0) {
+        for (const child of queue[0].children) {
+          queue.push(child);
+        }
+      }
+      queue.shift();
+    }
+  }
 }
