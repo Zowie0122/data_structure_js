@@ -134,7 +134,18 @@ class BinarySearchTree {
     check(this);
     return isFull;
   }
+  getHeight(tree) {
+    if (tree === undefined) {
+      return 0;
+    }
+    let left = this.getHeight(tree.left);
+    let right = this.getHeight(tree.right);
+    return Math.max(left, right) + 1;
+  }
 
-  getHeight() {}
-  checkIfBalanced() {}
+  checkIfBalanced() {
+    const leftHeight = this.getHeight(this.left);
+    const rightHeight = this.getHeight(this.right);
+    return Math.abs(leftHeight - rightHeight) < 1;
+  }
 }
